@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Abelix</title>
+  <meta name="description" content="Abelix tracks every wallet earning USDC from the Polymarket referral program. Live on-chain leaderboard, daily PNL calendar, wallet profiles, and X handles. No filters. No fluff.">
+  <meta name="keywords" content="Polymarket, referral rewards, leaderboard, USDC, Polygon, on-chain, prediction markets, crypto referral, abelix, polymarket rewards tracker, polymarket leaderboard">
+  <meta name="author" content="Abelix">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#0000FE">
+  <link rel="canonical" href="https://abelix.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Abelix">
+  <meta property="og:url" content="https://abelix.app/">
+  <meta property="og:title" content="Abelix — Polymarket Referral Rewards Leaderboard">
+  <meta property="og:description" content="Live on-chain leaderboard of every wallet earning USDC from the Polymarket referral program. Daily PNL calendar and wallet profiles.">
+  <meta property="og:image" content="https://abelix.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Abelix — Polymarket Referral Rewards Leaderboard">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@abelix_app">
+  <meta name="twitter:creator" content="@abelix_app">
+  <meta name="twitter:url" content="https://abelix.app/">
+  <meta name="twitter:title" content="Abelix — Polymarket Referral Rewards Leaderboard">
+  <meta name="twitter:description" content="Live on-chain leaderboard of every wallet earning USDC from the Polymarket referral program.">
+  <meta name="twitter:image" content="https://abelix.app/og-image.png">
+  <meta name="twitter:image:alt" content="Abelix — Polymarket Referral Rewards Leaderboard">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://abelix.app/#website",
+        "url": "https://abelix.app/",
+        "name": "Abelix",
+        "description": "Live on-chain leaderboard of every wallet earning USDC from the Polymarket referral program.",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://abelix.app/#org",
+        "name": "Abelix",
+        "url": "https://abelix.app/",
+        "logo": "https://abelix.app/icons/fav.svg",
+        "sameAs": ["https://x.com/abelix_app"]
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Abelix Rewards Tracker",
+        "url": "https://abelix.app/rewards",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "publisher": { "@id": "https://abelix.app/#org" }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/icons/fav.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&family=Inter+Tight:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Alan+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css?v=43">
+</head>
+<body>
+  <!-- ===== PAGE TRANSITION PRELOADER ===== -->
+  <div class="page-loader" id="pageLoader" aria-hidden="true">
+    <div class="page-loader__corner page-loader__corner--tl"></div>
+    <div class="page-loader__corner page-loader__corner--tr"></div>
+    <div class="page-loader__corner page-loader__corner--bl"></div>
+    <div class="page-loader__corner page-loader__corner--br"></div>
+    <div class="page-loader__rail page-loader__rail--top"></div>
+    <div class="page-loader__rail page-loader__rail--bottom"></div>
+    <div class="page-loader__core">
+      <div class="page-loader__shape" aria-hidden="true">
+        <svg class="page-loader__mark" viewBox="0 0 235 216" xmlns="http://www.w3.org/2000/svg">
+          <path d="M107.015 63.396L48 166.097C48 166.097 77.041 124.854 109.798 124.854C142.555 124.854 171.596 166.097 171.596 166.097L112.582 63.396C111.347 61.248 108.249 61.248 107.015 63.396Z"/>
+        </svg>
+      </div>
+      <span class="page-loader__label" id="pageLoaderLabel">LOADING</span>
+    </div>
+  </div>
+
+  <!-- ===== HOME PAGE ===== -->
+  <section class="page page-home active" id="page-home">
+    <!-- Particle dust canvas — full-screen, renders logo + text -->
+    <canvas id="heroLines" class="hm-lines" aria-hidden="true"></canvas>
+
+    <!-- Subtle background grid + scan-line treatment -->
+    <div class="hm-grid" aria-hidden="true"></div>
+    <div class="hm-scan" aria-hidden="true"></div>
+    <div class="hm-shape hm-shape--ring" aria-hidden="true"></div>
+    <div class="hm-shape hm-shape--frame" aria-hidden="true"></div>
+    <div class="hm-shape hm-shape--diag" aria-hidden="true"></div>
+    <div class="hm-line hm-line--top" aria-hidden="true"></div>
+    <div class="hm-line hm-line--bottom" aria-hidden="true"></div>
+
+    <!-- Brutalist corner brackets, like camera framing marks -->
+    <div class="hm-corner hm-corner--tl" aria-hidden="true"></div>
+    <div class="hm-corner hm-corner--tr" aria-hidden="true"></div>
+    <div class="hm-corner hm-corner--bl" aria-hidden="true"></div>
+    <div class="hm-corner hm-corner--br" aria-hidden="true"></div>
+
+    <!-- Vertical side rails with rotated meta text -->
+    <div class="hm-rail hm-rail--left" aria-hidden="true">
+      <span class="hm-rail-text">ABELIX // REFERRAL TERMINAL</span>
+    </div>
+    <div class="hm-rail hm-rail--right" aria-hidden="true">
+      <span class="hm-rail-text">BUILD: A.0 / RAW LEDGER</span>
+    </div>
+
+    <!-- Header: two brutalist CTAs -->
+    <header class="hm-header">
+      <a class="hm-hbtn hm-hbtn--primary" href="/rewards" data-page="rewards">
+        REWARDS <span aria-hidden="true">→</span>
+      </a>
+      <a class="hm-hbtn hm-hbtn--ghost" href="https://x.com/abelix_app" target="_blank" rel="noopener noreferrer" aria-label="Open @abelix_app on X">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/>
+        </svg>
+        <span class="hm-hbtn__handle">@abelix_app</span>
+      </a>
+    </header>
+
+    <!-- Top-left identity badge -->
+    <div class="hm-badge" aria-hidden="true">
+      <span class="hm-badge-dot"></span>
+      <span class="hm-badge-text">SYSTEM ONLINE</span>
+    </div>
+
+    <!-- Mobile-only hero: type-driven, no canvas dependency -->
+    <div class="hm-mobile" aria-hidden="false">
+      <div class="hm-mobile__top">
+        <span class="hm-mobile__dot"></span>
+        <span class="hm-mobile__meta">N°001 — 2026 / RAW LEDGER</span>
+      </div>
+
+      <div class="hm-mobile__mark">
+        <svg class="hm-mobile__logo" viewBox="0 0 235 216" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M107.015 63.396L48 166.097C48 166.097 77.041 124.854 109.798 124.854C142.555 124.854 171.596 166.097 171.596 166.097L112.582 63.396C111.347 61.248 108.249 61.248 107.015 63.396Z"/>
+        </svg>
+        <h1 class="hm-mobile__word">ABELIX</h1>
+        <p class="hm-mobile__kicker">POLYMARKET / REFERRAL / USDC</p>
+      </div>
+
+      <div class="hm-mobile__soon">
+        <span class="hm-mobile__soon-l1">COMING</span>
+        <span class="hm-mobile__soon-l2">soon<em>.</em></span>
+      </div>
+
+      <div class="hm-mobile__cta">
+        <a class="hm-mobile__btn hm-mobile__btn--primary" href="/rewards" data-page="rewards">
+          <span>REWARDS</span>
+          <span class="hm-mobile__btn-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="hm-mobile__btn hm-mobile__btn--ghost"
+           href="https://x.com/abelix_app"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Open @abelix_app on X">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/>
+          </svg>
+          <span>@abelix_app</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Coming soon subtitle (rendered with display typography) -->
+    <div class="hm-tagline" aria-hidden="false">
+      <p class="hm-tagline-eyebrow">/ N°001 — 2026</p>
+      <h2 class="hm-tagline-title">
+        Coming <em>soon</em><span class="hm-tagline-dot">.</span>
+      </h2>
+      <p class="hm-tagline-sub">Something is being assembled here.</p>
+    </div>
+
+    <!-- Bottom marquee strip -->
+    <div class="hm-marquee" aria-hidden="true">
+      <div class="hm-marquee-track">
+        <span>MARKETS</span><span>★</span>
+        <span>TRADERS</span><span>★</span>
+        <span>FINDER</span><span>★</span>
+        <span>BUILDERS</span><span>★</span>
+        <span>SPREAD</span><span>★</span>
+        <span>AI</span><span>★</span>
+        <span>MARKETS</span><span>★</span>
+        <span>TRADERS</span><span>★</span>
+        <span>FINDER</span><span>★</span>
+        <span>BUILDERS</span><span>★</span>
+        <span>SPREAD</span><span>★</span>
+        <span>AI</span><span>★</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REWARDS PAGE ===== -->
+  <section class="page page-rewards" id="page-rewards">
+
+    <!-- Background scattered trader cards -->
+    <div class="feature-splash" id="featureSplash" aria-hidden="true"></div>
+
+    <!-- Top bar: logo + nav anchor -->
+    <header class="rw-topbar">
+      <a href="/" class="rw-logo" data-page="home" aria-label="Go to Home">
+        <svg class="rw-logo-svg" viewBox="0 0 235 216" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M107.015 63.396L48 166.097C48 166.097 77.041 124.854 109.798 124.854C142.555 124.854 171.596 166.097 171.596 166.097L112.582 63.396C111.347 61.248 108.249 61.248 107.015 63.396Z"/>
+        </svg>
+        <span class="rw-logo-mark">ABELIX</span>
+      </a>
+      <div class="rw-topbar-meta">
+        <span class="rw-tag">// REWARDS_TERMINAL</span>
+        <a class="rw-tag rw-tag-live" href="https://x.com/abelix_app" target="_blank" rel="noopener" aria-label="Open abelix on X">
+          <img src="/icons/x-logo.jpg" alt="" width="12" height="12"> X / @ABELIX_APP
+        </a>
+      </div>
+    </header>
+
+    <main class="rw-main">
+      <!-- HERO -->
+      <section class="rw-hero">
+        <div class="rw-hero-grid">
+          <div class="rw-hero-left">
+            <div class="rw-hero-eyebrow">POLYMARKET / REFERRAL / USDC</div>
+            <h1 class="rw-hero-title">
+              <span class="rw-hero-line">REFERRAL</span>
+              <span class="rw-hero-line rw-hero-line--alt">REWARDS</span>
+            </h1>
+            <p class="rw-hero-sub">
+              Raw on-chain leaderboard of every wallet earning USDC from the
+              Polymarket referral program. No filters. No fluff.
+            </p>
+          </div>
+          <aside class="rw-hero-right">
+            <div class="rw-stat-block">
+              <div class="rw-stat-label">TRACKED WALLETS</div>
+              <div class="rw-stat-value" id="statWallets">—</div>
+            </div>
+            <div class="rw-stat-block rw-stat-block--inv">
+              <div class="rw-stat-label">TOTAL USDC PAID</div>
+              <div class="rw-stat-value" id="statTotal">—</div>
+            </div>
+            <div class="rw-stat-block rw-stat-block--ink">
+              <div class="rw-stat-label">LAST UPDATE</div>
+              <div class="rw-stat-value rw-stat-value--sm" id="statUpdated">—</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- SEARCH -->
+      <section class="rw-search">
+        <div class="rw-search-bar">
+          <span class="rw-search-prompt">&gt;_</span>
+          <div class="rw-search-input-wrap">
+            <input type="text" id="searchInput" placeholder="SEARCH USERNAME OR 0xADDRESS…" spellcheck="false" autocomplete="off">
+            <ul id="suggestions" class="suggestions hidden"></ul>
+          </div>
+          <button id="searchBtn" class="rw-btn">EXECUTE</button>
+        </div>
+        <p id="searchError" class="rw-error hidden"></p>
+      </section>
+
+      <!-- LEADERBOARD -->
+      <section class="rw-leaderboard">
+        <div class="rw-section-head">
+          <h2 class="rw-section-title">LEADERBOARD<span>/</span><em id="lbTotalLabel">—</em></h2>
+          <div class="rw-toolbar">
+            <label class="rw-switch">
+              <input type="checkbox" id="filterX">
+              <span class="rw-switch-track"><span class="rw-switch-thumb"></span></span>
+              <span class="rw-switch-label">X-VERIFIED ONLY</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="rw-table-wrap">
+          <table id="walletTable" class="rw-table">
+            <thead>
+              <tr>
+                <th class="col-rank">RANK</th>
+                <th class="col-user">USER</th>
+                <th class="col-addr">ADDRESS</th>
+                <th class="col-total">TOTAL USDC</th>
+                <th class="col-last">LAST</th>
+                <th class="col-act"></th>
+              </tr>
+            </thead>
+            <tbody id="walletTableBody">
+              <tr><td colspan="6" class="rw-loading">LOADING WALLETS…</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PAGINATION -->
+        <nav class="rw-pagination" id="pagination" aria-label="Pagination"></nav>
+      </section>
+    </main>
+
+    <!-- ===== PROFILE MODAL ===== -->
+    <div class="rw-modal hidden" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+      <div class="rw-modal-backdrop" data-close></div>
+      <article class="rw-modal-card">
+        <button class="rw-modal-close" data-close aria-label="Close">Г—</button>
+
+        <header class="rw-pm-head">
+          <div class="rw-pm-rank" id="pmRank">#—</div>
+          <div class="rw-pm-id">
+            <h3 id="pmTitle" class="rw-pm-name">—</h3>
+            <code id="pmAddr" class="rw-pm-addr">0x…</code>
+          </div>
+          <div class="rw-pm-links" id="pmLinks"></div>
+        </header>
+
+        <section class="rw-pm-stats">
+          <div class="rw-pm-stat">
+            <div class="rw-pm-stat-l">TOTAL USDC</div>
+            <div class="rw-pm-stat-v" id="pmTotal">—</div>
+          </div>
+          <div class="rw-pm-stat">
+            <div class="rw-pm-stat-l">PAYOUTS</div>
+            <div class="rw-pm-stat-v" id="pmCount">—</div>
+          </div>
+          <div class="rw-pm-stat">
+            <div class="rw-pm-stat-l">LAST REWARD</div>
+            <div class="rw-pm-stat-v" id="pmLast">—</div>
+          </div>
+          <div class="rw-pm-stat">
+            <div class="rw-pm-stat-l">LAST DATE</div>
+            <div class="rw-pm-stat-v rw-pm-stat-v--sm" id="pmLastDate">—</div>
+          </div>
+        </section>
+
+        <section class="rw-pm-cal">
+          <div class="rw-cal-head">
+            <h4>PNL CALENDAR</h4>
+            <div class="rw-cal-nav">
+              <button class="rw-btn rw-btn--ghost" id="calPrev" aria-label="Previous month">←</button>
+              <span class="rw-cal-month" id="calMonth">—</span>
+              <button class="rw-btn rw-btn--ghost" id="calNext" aria-label="Next month">→</button>
+            </div>
+          </div>
+          <div class="rw-cal-legend">
+            <span>NONE</span>
+            <span class="rw-leg-cell rw-leg-cell--l1"></span>
+            <span class="rw-leg-cell rw-leg-cell--l2"></span>
+            <span class="rw-leg-cell rw-leg-cell--l3"></span>
+            <span class="rw-leg-cell rw-leg-cell--l4"></span>
+            <span>MAX</span>
+            <span class="rw-cal-spacer"></span>
+            <span>MONTH USDC: <strong id="calMonthTotal">—</strong></span>
+          </div>
+          <div class="rw-cal-grid" id="calGrid"></div>
+        </section>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== 404 PAGE ===== -->
+  <section class="page page-404" id="page-404">
+    <div class="nf-corner nf-corner--tl" aria-hidden="true"></div>
+    <div class="nf-corner nf-corner--tr" aria-hidden="true"></div>
+    <div class="nf-corner nf-corner--bl" aria-hidden="true"></div>
+    <div class="nf-corner nf-corner--br" aria-hidden="true"></div>
+
+    <div class="nf-stage">
+      <p class="nf-eyebrow">// ERROR · ROUTE NOT FOUND</p>
+      <h1 class="nf-code" aria-label="404">
+        <span>4</span><span class="nf-code__zero">0</span><span>4</span>
+      </h1>
+      <h2 class="nf-headline">PAGE <em>missing</em><span class="nf-dot">.</span></h2>
+      <p class="nf-sub">The route <code id="nf-path">/—</code> doesn't exist on this terminal.</p>
+      <div class="nf-cta">
+        <a class="nf-btn nf-btn--primary" href="/" data-page="home">
+          <span aria-hidden="true">←</span><span>BACK HOME</span>
+        </a>
+        <a class="nf-btn nf-btn--ghost" href="/rewards" data-page="rewards">
+          <span>REWARDS</span><span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="nf-marquee" aria-hidden="true">
+      <div class="nf-marquee-track">
+        <span>404</span><span>★</span><span>ROUTE NOT FOUND</span><span>★</span>
+        <span>ABELIX // 2026</span><span>★</span><span>RAW LEDGER</span><span>★</span>
+        <span>404</span><span>★</span><span>ROUTE NOT FOUND</span><span>★</span>
+        <span>ABELIX // 2026</span><span>★</span><span>RAW LEDGER</span><span>★</span>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="/app.js?v=40"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(0,0,254,0.08)" stroke-width="1"/>
+    </pattern>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/>
+    </filter>
+  </defs>
+
+  <!-- Paper background -->
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" filter="url(#noise)"/>
+
+  <!-- Brutalist corner brackets -->
+  <g stroke="#0E0D0D" stroke-width="6" fill="none">
+    <path d="M 40 40 L 100 40 M 40 40 L 40 100"/>
+    <path d="M 1160 40 L 1100 40 M 1160 40 L 1160 100"/>
+    <path d="M 40 590 L 100 590 M 40 590 L 40 530"/>
+    <path d="M 1160 590 L 1100 590 M 1160 590 L 1160 530"/>
+  </g>
+
+  <!-- Side rails meta text -->
+  <g font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" fill="rgba(14,13,13,0.55)" letter-spacing="3">
+    <text transform="translate(72 540) rotate(-90)">ABELIX // REFERRAL TERMINAL // POLYMARKET</text>
+    <text transform="translate(1128 90) rotate(90)">N°001 — 2026 / BUILD: A.0 / RAW LEDGER</text>
+  </g>
+
+  <!-- Status badge -->
+  <g transform="translate(110 110)">
+    <rect x="0" y="0" width="170" height="34" fill="none" stroke="#0E0D0D" stroke-width="2"/>
+    <circle cx="18" cy="17" r="5" fill="#0000FE"/>
+    <text x="34" y="22" font-family="'JetBrains Mono', monospace" font-size="12" fill="#0E0D0D" letter-spacing="2">SYSTEM ONLINE</text>
+  </g>
+
+  <!-- Logo + wordmark -->
+  <g transform="translate(110 200)">
+    <svg viewBox="0 0 235 216" x="0" y="0" width="96" height="88">
+      <path d="M107.015 63.396L48 166.097C48 166.097 77.041 124.854 109.798 124.854C142.555 124.854 171.596 166.097 171.596 166.097L112.582 63.396C111.347 61.248 108.249 61.248 107.015 63.396Z" fill="#0000FE"/>
+    </svg>
+    <text x="112" y="68" font-family="'Archivo Black', 'Inter Tight', sans-serif" font-size="64" font-weight="900" fill="#0E0D0D" letter-spacing="-2">ABELIX</text>
+  </g>
+
+  <!-- Eyebrow -->
+  <text x="110" y="340" font-family="'JetBrains Mono', monospace" font-size="16" fill="rgba(14,13,13,0.55)" letter-spacing="4">POLYMARKET / REFERRAL / USDC</text>
+
+  <!-- Headline -->
+  <g font-family="'Inter Tight', 'Archivo Black', sans-serif" font-weight="900" font-size="86" fill="#0E0D0D" letter-spacing="-3">
+    <text x="110" y="430">REFERRAL</text>
+    <text x="110" y="510" fill="#0000FE">REWARDS</text>
+  </g>
+
+  <!-- Subline -->
+  <text x="110" y="560" font-family="'Space Grotesk', system-ui, sans-serif" font-size="22" fill="#0E0D0D" opacity="0.75">
+    Raw on-chain leaderboard. No filters. No fluff.
+  </text>
+
+  <!-- Bottom marquee strip -->
+  <g>
+    <rect x="0" y="592" width="1200" height="38" fill="#0E0D0D"/>
+    <text x="20" y="618" font-family="'Archivo Black', sans-serif" font-size="16" fill="#ffffff" letter-spacing="3">
+      ABELIX // 2026  ★  POLYMARKET  ★  REFERRAL REWARDS  ★  ON-CHAIN USDC  ★  RAW LEDGER  ★  @ABELIX_APP
+    </text>
+  </g>
+
+  <!-- Handle tag top right -->
+  <g transform="translate(900 110)">
+    <rect x="0" y="0" width="190" height="34" fill="#0000FE"/>
+    <text x="14" y="22" font-family="'JetBrains Mono', monospace" font-size="13" fill="#ffffff" letter-spacing="2">X / @ABELIX_APP</text>
+  </g>
+</svg>
