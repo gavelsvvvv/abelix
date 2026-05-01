@@ -672,11 +672,8 @@ const createSplashCard = (user, total, last, pos, index) => {
 
   const head = document.createElement('div');
   head.className = 'fc-head';
-  if (user.avatar) {
-    const img = document.createElement('img');
-    img.src = user.avatar; img.alt = ''; img.className = 'fc-avatar';
-    head.appendChild(img);
-  } else {
+  
+  const createPlaceholder = () => {
     const ph = document.createElement('div');
     ph.className = 'fc-avatar';
     ph.style.display = 'flex';
@@ -685,7 +682,18 @@ const createSplashCard = (user, total, last, pos, index) => {
     ph.style.fontFamily = "'Archivo Black', sans-serif";
     ph.style.fontSize = '22px';
     ph.textContent = (user.displayName || '?').slice(0, 1).toUpperCase();
-    head.appendChild(ph);
+    return ph;
+  };
+  
+  if (user.avatar) {
+    const img = document.createElement('img');
+    img.src = user.avatar; img.alt = ''; img.className = 'fc-avatar';
+    img.onerror = () => {
+      img.replaceWith(createPlaceholder());
+    };
+    head.appendChild(img);
+  } else {
+    head.appendChild(createPlaceholder());
   }
   const ident = document.createElement('div');
   ident.style.minWidth = '0';
