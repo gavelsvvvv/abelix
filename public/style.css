@@ -25,6 +25,32 @@ html {
   font-size: 16px;
 }
 
+/* Custom scrollbar - neo-brutalist style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0E0D0D;
+  border-left: 2px solid #0E0D0D;
+}
+::-webkit-scrollbar-thumb {
+  background: #0000FE;
+  border: 2px solid #0E0D0D;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3333FF;
+}
+::-webkit-scrollbar-corner {
+  background: #0E0D0D;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0000FE #0E0D0D;
+}
+
 body {
   font-family: 'Space Mono', monospace;
   background: var(--bg);
@@ -753,6 +779,18 @@ tbody tr:hover {
   background: var(--rw-paper);
   color: var(--rw-ink);
   font-family: 'Space Grotesk', system-ui, sans-serif;
+  scrollbar-color: var(--rw-blue) var(--rw-paper);
+}
+.page-rewards ::-webkit-scrollbar-track {
+  background: var(--rw-paper);
+  border-left: 2px solid var(--rw-ink);
+}
+.page-rewards ::-webkit-scrollbar-thumb {
+  background: var(--rw-blue);
+  border: 2px solid var(--rw-ink);
+}
+.page-rewards ::-webkit-scrollbar-thumb:hover {
+  background: #3333FF;
   min-height: 100vh;
   padding-top: 0;
   position: relative;
