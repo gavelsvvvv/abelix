@@ -1950,11 +1950,11 @@ a.rw-tag-live:hover { transform: translate(-2px, -2px); }
 .page-home .hm-corner--tr::before { top: 0; right: 0; }
 .page-home .hm-corner--tr::after  { top: 0; right: 0; }
 
-.page-home .hm-corner--bl { bottom: 18px; left: 18px; }
+.page-home .hm-corner--bl { bottom: 54px; left: 18px; }
 .page-home .hm-corner--bl::before { bottom: 0; left: 0; }
 .page-home .hm-corner--bl::after  { bottom: 0; left: 0; }
 
-.page-home .hm-corner--br { bottom: 18px; right: 18px; }
+.page-home .hm-corner--br { bottom: 54px; right: 18px; }
 .page-home .hm-corner--br::before { bottom: 0; right: 0; }
 .page-home .hm-corner--br::after  { bottom: 0; right: 0; }
 
@@ -3459,7 +3459,7 @@ a.rw-tag-live:hover { transform: translate(-2px, -2px); }
   .page-home .hm-corner--tl,
   .page-home .hm-corner--tr { top: 10px; }
   .page-home .hm-corner--bl,
-  .page-home .hm-corner--br { bottom: 10px; }
+  .page-home .hm-corner--br { bottom: 46px; }
 
   .page-home .hm-marquee { height: 28px; }
   .page-home .hm-marquee-track {
@@ -3762,7 +3762,7 @@ a.rw-tag-live:hover { transform: translate(-2px, -2px); }
   /* Brackets stay as framing marks */
   .page-home .hm-corner { width: 16px; height: 16px; }
   .page-home .hm-corner--tl, .page-home .hm-corner--tr { top: 8px; }
-  .page-home .hm-corner--bl, .page-home .hm-corner--br { bottom: 32px; }
+  .page-home .hm-corner--bl, .page-home .hm-corner--br { bottom: 42px; }
 }
 
 /* Very small phones — keep the layout safe */
