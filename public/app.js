@@ -542,8 +542,8 @@ const readLockedSeed = () => {
   } catch { return null; }
 };
 
-// Fixed theme seed 0xE992D5A9 - permanently locked
-let layoutSeed = 0xE992D5A9;
+// Fixed theme seed 0x6C3F91B2 - permanently locked
+let layoutSeed = 0x6C3F91B2;
 let layoutRand = mulberry32(layoutSeed);
 let lastWalletsForSplash = null;
 
