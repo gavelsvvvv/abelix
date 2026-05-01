@@ -156,17 +156,24 @@ const fetchBatch = async (rewardAddress, tokenAddress, startBlock) => {
     sort: 'asc',
   });
 
-  const res = await fetch(`${POLYGONSCAN_API}?${params}`);
+  const url = `${POLYGONSCAN_API}?${params}`;
+  console.log(`    Fetching: ${POLYGONSCAN_API} (block ${startBlock}+)`);
+  
+  const res = await fetch(url);
   if (!res.ok) {
+    const text = await res.text();
+    console.error(`    API error ${res.status}: ${text.slice(0, 200)}`);
     throw new Error(`PolygonScan responded with status ${res.status}`);
   }
   const json = await res.json();
 
   if (json.status !== '1' || !Array.isArray(json.result)) {
     const msg = json.message || json.result || 'Unknown error';
+    console.log(`    API response: status=${json.status}, message=${msg}`);
     if (String(msg) === 'No transactions found') return [];
     throw new Error(`PolygonScan API error: ${msg}`);
   }
+  console.log(`    Got ${json.result.length} transactions`);
   return json.result;
 };
 
@@ -279,17 +286,25 @@ const buildCache = (txs) => {
   return { map, daily };
 };
 
+let lastError = null;
+let lastRefresh = null;
+
 const refreshCache = async () => {
   try {
     console.log('Refreshing transaction cache…');
     const txs = await fetchAllTransactions();
+    console.log(`Fetched ${txs.length} total transactions`);
     const newCache = buildCache(txs);
     walletCache = newCache.map;
     dailyCache = newCache.daily;
     cacheReady = true;
+    lastRefresh = new Date().toISOString();
+    lastError = null;
     console.log(`Cache refreshed: ${walletCache.size} wallets from ${txs.length} transactions`);
   } catch (err) {
+    lastError = err.message;
     console.error('Cache refresh failed:', err.message);
+    console.error('Full error:', err);
     if (!cacheReady) {
       console.error('No cached data available — retrying in 30 seconds');
       setTimeout(refreshCache, 30_000);
@@ -359,6 +374,19 @@ app.get('/_/k', (_req, res) => {
   sessionTokens.set(token, Date.now() + TOKEN_TTL_MS);
   res.setHeader('Cache-Control', 'no-store');
   res.json({ t: token, e: TOKEN_TTL_MS });
+});
+
+// Status endpoint for debugging
+app.get('/_/status', (_req, res) => {
+  res.json({
+    cacheReady,
+    walletCount: walletCache.size,
+    lastRefresh,
+    lastError,
+    sources: rewardSources.map(s => ({ name: s.name, address: s.rewardAddress })),
+    apiKeyPresent: !!API_KEY,
+    apiKeyPrefix: API_KEY ? API_KEY.slice(0, 8) + '...' : null,
+  });
 });
 
 // Encrypted leaderboard
