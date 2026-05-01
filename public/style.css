@@ -2066,8 +2066,8 @@ a.rw-tag-live:hover { transform: translate(-2px, -2px); }
 }
 
 @keyframes hmMarquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
 }
 
 /* Lift the tagline a touch so it doesn't collide with the marquee */
