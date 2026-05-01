@@ -130,14 +130,14 @@ const copyShareLink = async (address) => {
 
 // --------------- Featured users config ---------------
 const FEATURED_USERS = [
-  { address: '0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b', displayName: 'CarOnPolymarket', avatar: 'avatars/car.png' },
-  { address: '0xa4b366ad22fc0d06f1e934ff468e8922431a87b8', displayName: 'HolyMoses7', avatar: 'avatars/holymoses.jpg' },
-  { address: '0xb7f55b6d32c2ee3768192d676cd66354f51fc669', displayName: 'BagCalls', avatar: 'avatars/bagcalls.jpg' },
-  { address: '0x154794795d978c5890b3f69264311f0bd966d066', displayName: 'PMTraderAdam', avatar: 'avatars/pmtrader.png' },
-  { address: '0x5bac37ae4b985011e34862ec14c3ae72ebbf8769', displayName: '0xBumblebee', avatar: 'avatars/bumblebee.jpg' },
-  { address: '0x7b5887dcffa32af1ec155a8835c48b4e948aeb2b', displayName: 'senzer', avatar: 'avatars/senzer.jpg' },
-  { address: '0x0f863d92dd2b960e3eb6a23a35fd92a91981404e', displayName: 'CUTNPASTE4', avatar: 'avatars/cutnpaste4.jpg' },
-  { address: '0xf8041623faef5c3bdbeec3f4c18360a720b04c3d', displayName: 'adiix_official', avatar: 'avatars/adiix.jpg' },
+  { address: '0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b', displayName: 'CarOnPolymarket', avatar: '/avatars/car.png' },
+  { address: '0xa4b366ad22fc0d06f1e934ff468e8922431a87b8', displayName: 'HolyMoses7', avatar: '/avatars/holymoses.jpg' },
+  { address: '0xb7f55b6d32c2ee3768192d676cd66354f51fc669', displayName: 'BagCalls', avatar: '/avatars/bagcalls.jpg' },
+  { address: '0x154794795d978c5890b3f69264311f0bd966d066', displayName: 'PMTraderAdam', avatar: '/avatars/pmtrader.png' },
+  { address: '0x5bac37ae4b985011e34862ec14c3ae72ebbf8769', displayName: '0xBumblebee', avatar: '/avatars/bumblebee.jpg' },
+  { address: '0x7b5887dcffa32af1ec155a8835c48b4e948aeb2b', displayName: 'senzer', avatar: '/avatars/senzer.jpg' },
+  { address: '0x0f863d92dd2b960e3eb6a23a35fd92a91981404e', displayName: 'CUTNPASTE4', avatar: '/avatars/cutnpaste4.jpg' },
+  { address: '0xf8041623faef5c3bdbeec3f4c18360a720b04c3d', displayName: 'adiix_official', avatar: '/avatars/adiix.jpg' },
 ];
 
 // --------------- Helpers ---------------
