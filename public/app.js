@@ -486,6 +486,14 @@ const renderPagination = (totalPages) => {
   });
 
   paginationEl.append(btns, jump);
+
+  if (document.getElementById('page-rewards')?.classList.contains('active') && lastWalletsForSplash) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setTimeout(() => _doBuildFeatureSplash(lastWalletsForSplash), 80);
+      });
+    });
+  }
 };
 
 const goToPage = (page) => {
@@ -539,6 +547,21 @@ let layoutSeed = 0xE992D5A9;
 let layoutRand = mulberry32(layoutSeed);
 let lastWalletsForSplash = null;
 
+const measureRewardsSplashWidth = () => {
+  const rect = featureSplash ? featureSplash.getBoundingClientRect() : null;
+  const w = rect && rect.width > 100 ? rect.width : 0;
+  return w > 100 ? w : window.innerWidth;
+};
+
+const measureRewardsSplashHeight = () => {
+  const page = document.getElementById('page-rewards');
+  if (page && page.classList.contains('active')) {
+    const h = page.offsetHeight;
+    return Math.max(h, window.innerHeight * 1.1, 1400);
+  }
+  return Math.max(window.innerHeight * 1.6, document.documentElement.scrollHeight || 0, 1600);
+};
+
 const _doBuildFeatureSplash = (wallets) => {
   if (!featureSplash) return;
   // Re-seed RNG for every build so the same seed always yields the same layout.
@@ -568,9 +591,8 @@ const _doBuildFeatureSplash = (wallets) => {
   // BOZOS sits above, Senzer directly below it.
   // Anchor to the splash container's box (not the viewport) so positions stay
   // correct under browser zoom / different page widths.
-  const splashRect = featureSplash.getBoundingClientRect();
-  const pageW = splashRect.width > 100 ? splashRect.width : window.innerWidth;
-  const pageH = Math.max(splashRect.height > 100 ? splashRect.height : 0, window.innerHeight * 1.6, document.body.scrollHeight || 1600);
+  const pageW = measureRewardsSplashWidth();
+  const pageH = measureRewardsSplashHeight();
   const rightX = Math.max(20, Math.min(pageW - 220, pageW - 180));
   const pinned = {
     bozos:  { left: rightX, top: pageH * 0.66, rotation: -4 },
@@ -633,31 +655,32 @@ window.addEventListener('resize', () => {
 }, { passive: true });
 
 const scatterPositions = (count) => {
-  // Distribute across full page with controlled jitter; place around content edges.
-  // Anchor to splash container box (not viewport) so card positions remain
-  // valid when the browser is zoomed in / out or the window resized.
-  const rect = featureSplash ? featureSplash.getBoundingClientRect() : { width: 0, height: 0 };
-  // Use window dimensions as fallback if rect is 0 (page not yet laid out)
-  const W = rect.width > 100 ? rect.width : window.innerWidth;
-  const H = Math.max(rect.height > 100 ? rect.height : 0, window.innerHeight * 1.6, document.body.scrollHeight || 1600);
+  const W = measureRewardsSplashWidth();
+  const H = measureRewardsSplashHeight();
   const positions = [];
-  const cols = 4, rows = Math.ceil(count / cols);
-  let n = 0;
-  for (let r = 0; r < rows && n < count; r++) {
-    for (let c = 0; c < cols && n < count; c++) {
-      const baseX = ((c + 0.5) / cols) * W;
-      const baseY = ((r + 0.5) / rows) * H;
-      const jitterX = (layoutRand() - 0.5) * (W / cols) * 0.6;
-      const jitterY = (layoutRand() - 0.5) * (H / rows) * 0.5;
-      // Bias outward to keep center column readable
-      const sideBias = (c < cols / 2 ? -1 : 1) * (W * 0.06);
-      positions.push({
-        left: Math.max(20, Math.min(W - 220, baseX + jitterX + sideBias)),
-        top: Math.max(120, baseY + jitterY),
-        rotation: -10 + layoutRand() * 20,
-      });
-      n++;
-    }
+  // Vertical band: from below hero/search into leaderboard scroll area
+  const marginTop = 150;
+  const marginBottom = 140;
+  const usableH = Math.max(420, H - marginTop - marginBottom);
+  const halfW = 105; // ~half card width for clamping
+
+  for (let i = 0; i < count; i++) {
+    const t = count > 1 ? i / (count - 1) : 0.5;
+    const baseY = marginTop + t * usableH;
+    const jitterY = (layoutRand() - 0.5) * (usableH / Math.max(count, 6)) * 0.45;
+    const onLeft = i % 2 === 0;
+    const bandL0 = W * 0.07;
+    const bandL1 = W * 0.24;
+    const bandR0 = W * 0.76;
+    const bandR1 = W * 0.93;
+    const x0 = onLeft
+      ? bandL0 + layoutRand() * (bandL1 - bandL0)
+      : bandR0 + layoutRand() * (bandR1 - bandR0);
+    positions.push({
+      left: Math.max(halfW + 16, Math.min(W - halfW - 16, x0)),
+      top: Math.max(marginTop + 40, Math.min(H - marginBottom, baseY + jitterY)),
+      rotation: -9 + layoutRand() * 18,
+    });
   }
   return positions;
 };
