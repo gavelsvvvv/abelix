@@ -1073,6 +1073,10 @@ const openProfile = async (address) => {
   pmLastDate.textContent = formatDate(wallet.lastTxDate);
 
   profileModal.classList.remove('hidden');
+  const scrollbarWidth = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+  if (scrollbarWidth > 0) {
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  }
   document.body.style.overflow = 'hidden';
 
   // Load history
@@ -1109,6 +1113,7 @@ const closeProfile = () => {
     profileModal.classList.add('hidden');
     profileModal.classList.remove('rw-modal--closing');
     document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   }, 160);
   // Drop the per-profile fragment so refreshing won't re-open the modal.
   if (/^\/rewards\/0x[a-fA-F0-9]{40}/i.test(location.pathname)) {
@@ -1241,6 +1246,7 @@ calNext?.addEventListener('click', () => {
       profileModal.classList.add('hidden');
       profileModal.classList.remove('rw-modal--closing');
       document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     }
     Object.entries(pages).forEach(([key, el]) => {
       el.classList.toggle('active', key === name);

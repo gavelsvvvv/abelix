@@ -23,6 +23,7 @@
 
 html {
   font-size: 16px;
+  scrollbar-gutter: stable;
 }
 
 /* Custom scrollbar - neo-brutalist style */
