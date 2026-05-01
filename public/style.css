@@ -1422,13 +1422,13 @@ a.rw-tag-live:hover {
 .rw-pm-stat:last-child { border-right: 0; }
 .rw-pm-stat-l {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 0.14em;
   opacity: 0.7;
 }
 .rw-pm-stat-v {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   margin-top: 1px;
   word-break: break-word;
 }
