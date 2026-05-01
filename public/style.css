@@ -1343,10 +1343,10 @@ a.rw-tag-live:hover {
 .rw-modal-close {
   position: absolute;
   top: -1px; right: -1px;
-  width: 28px; height: 28px;
+  width: 25px; height: 25px;
   background: var(--rw-ink); color: #fff;
   border: 2px solid var(--rw-ink);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
   line-height: 1;
