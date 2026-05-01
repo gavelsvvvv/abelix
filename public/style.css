@@ -23,33 +23,6 @@
 
 html {
   font-size: 16px;
-  scrollbar-gutter: stable;
-}
-
-/* Custom scrollbar - neo-brutalist style */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-left: 2px solid #0E0D0D;
-}
-::-webkit-scrollbar-thumb {
-  background: #0000FE;
-  border: 2px solid #0E0D0D;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3333FF;
-}
-::-webkit-scrollbar-corner {
-  background: #ffffff;
-}
-
-/* Firefox scrollbar */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #0000FE #ffffff;
 }
 
 body {
@@ -761,7 +734,7 @@ tbody tr:hover {
 
 /* Push rewards page below the fixed nav */
 .page-rewards {
-  padding-top: 0;
+  padding-top: 3.5rem;
 }
 
 /* === see brutalist css below === */
@@ -780,29 +753,15 @@ tbody tr:hover {
   background: var(--rw-paper);
   color: var(--rw-ink);
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  scrollbar-color: var(--rw-blue) #ffffff;
-}
-
-/* Rewards page shell: positioning + paper texture (was merged into scrollbar rule by mistake) */
-#page-rewards.page.page-rewards {
+  min-height: 100vh;
+  padding-top: 0;
   position: relative;
   overflow-x: hidden;
-  background-color: var(--rw-paper);
+  overflow-y: auto;
+  /* Subtle paper-noise via SVG data-uri */
   background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   background-size: 220px 220px;
-}
-
-.page-rewards ::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-left: 2px solid var(--rw-ink);
-}
-.page-rewards ::-webkit-scrollbar-thumb {
-  background: var(--rw-blue);
-  border: 2px solid var(--rw-ink);
-}
-.page-rewards ::-webkit-scrollbar-thumb:hover {
-  background: #3333FF;
 }
 
 /* Hide global top-nav while on Rewards (we render our own bar) */
@@ -842,7 +801,7 @@ body:has(#page-rewards.active) .top-nav { display: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 18px 28px;
   background: var(--rw-paper);
   border-bottom: 2px solid var(--rw-ink);
   text-align: left;
@@ -914,7 +873,7 @@ a.rw-tag-live:hover {
   z-index: 2;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 14px 28px 80px;
+  padding: 36px 28px 80px;
 }
 
 /* ---- HERO ---- */
@@ -1387,7 +1346,7 @@ a.rw-tag-live:hover {
   width: 25px; height: 25px;
   background: var(--rw-ink); color: #fff;
   border: 2px solid var(--rw-ink);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   line-height: 1;
@@ -1581,9 +1540,7 @@ a.rw-tag-live:hover {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  /* Allow cards to extend slightly past edges; page clips horizontally */
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
 }
 .page-rewards .featured-card {
   position: absolute;
