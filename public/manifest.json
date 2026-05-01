@@ -1,0 +1,17 @@
+{
+  "name": "Abelix",
+  "short_name": "Abelix",
+  "description": "Polymarket Referral Rewards Tracker",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0000FE",
+  "icons": [
+    {
+      "src": "/icons/fav.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
